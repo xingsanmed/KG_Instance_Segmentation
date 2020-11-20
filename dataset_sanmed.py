@@ -10,15 +10,15 @@ import transforms
 import collater
 
 
-class Kaggle(BaseDataset):
+class Sanmed(BaseDataset):
     def __init__(self, data_dir, phase, transform=None):
-        super(Kaggle, self).__init__(data_dir, phase, transform)
-        self.class_name = ['__background__', 'kaggle']
+        super(Sanmed, self).__init__(data_dir, phase, transform)
+        self.class_name = ['__background__', 'sanmed']
         self.num_classes = len(self.class_name)-1
 
     def load_image(self, index):
         img_id = self.img_ids[index]
-        imgFile = os.path.join(self.img_dir, img_id, "images", img_id+'.png')
+        imgFile = os.path.join(self.img_dir, img_id, "images", img_id+'.jpg')
         img = cv2.imread(imgFile)
         return img
 
@@ -67,18 +67,18 @@ class Kaggle(BaseDataset):
 
 if __name__ == '__main__':
     # dataset = {'kaggle': Kaggle, 'plant': Plant, 'neural': Neural}
-    dataset_module = Kaggle
+    dataset_module = Sanmed
 
-    data_dir = r'/home/xing/Xing/Projects/MDA/Projects/Datasets/Kaggle_2018'
+    data_dir = r'/home/xing/Share/Projects/Sanmed/cell_seg/Data/20201020'
     data_trans = {'train': transforms.Compose([transforms.ConvertImgFloat(),
                                                transforms.PhotometricDistort(),
                                                transforms.Expand(max_scale=2, mean=(0, 0, 0)),
                                                transforms.RandomMirror_w(),
                                                transforms.RandomMirror_h(),
-                                               transforms.Resize(h=256, w=256)]),
+                                               transforms.Resize(h=2048, w=2048)]),
 
                   'val': transforms.Compose([transforms.ConvertImgFloat(),
-                                             transforms.Resize(h=256, w=256)])}
+                                             transforms.Resize(h=2048, w=2048)])}
 
     dsets = {x: dataset_module(data_dir= data_dir,
                                phase=x,

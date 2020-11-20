@@ -6,12 +6,12 @@ train_pts = []
 val_pts = []
 epoch_pts = []
 
-f_train = open("train_loss.txt", "rb")
+f_train = open("train_loss_kaggle.txt", "rb")
 for line in f_train:
     train_pts.append(float(line.strip()))
 f_train.close()
 
-f_val = open("val_loss.txt", "rb")
+f_val = open("val_loss_kaggle.txt", "rb")
 for line in f_val:
     val_pts.append(float(line.strip()))
 f_val.close()

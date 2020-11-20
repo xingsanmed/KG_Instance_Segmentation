@@ -44,7 +44,7 @@ class BaseDataset(Dataset):
         gt_masks = []
         gt_bboxes = []
         for mask in instance_masks:
-            rr,cc = np.where(mask==1.)
+            rr,cc = np.where(mask > 0)
             if len(rr>1):
                 y1 = np.min(rr)
                 x1 = np.min(cc)
@@ -63,7 +63,8 @@ class BaseDataset(Dataset):
 
         for mask in masks:
             mask_scale = cv2.resize(mask, (width_scale, height_scale), interpolation=cv2.INTER_NEAREST)
-            rr, cc = np.where(mask_scale == 1.)
+            # rr, cc = np.where(mask_scale == 1.)
+            rr, cc = np.where(mask_scale > 0)
             if len(rr > 1):
                 y1 = np.min(rr)
                 x1 = np.min(cc)

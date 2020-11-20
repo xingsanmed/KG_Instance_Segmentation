@@ -19,7 +19,7 @@ def parse_args():
     parser.add_argument("--resume", help="resume file", default="end_model.pth", type=str)
     parser.add_argument('--input_h', type=int, default=512, help='input height')
     parser.add_argument('--input_w', type=int, default=512, help='input width')
-    parser.add_argument('--save_img', type=bool, default=False, help='save img or not')
+    parser.add_argument('--save_img', type=bool, default=True, help='save img or not')
     parser.add_argument('--nms_thresh', type=float, default=0.5, help='nms_thresh')
     parser.add_argument('--seg_thresh', type=float, default=0.5, help='seg_thresh')
     parser.add_argument("--dataset", help="training dataset", default='kaggle', type=str)
@@ -164,7 +164,7 @@ class InstanceHeat(object):
                                      out_img,
                                      img_id=None,
                                      save_flag=False,
-                                     show_box=False,
+                                     show_box=True,
                                      save_path=None):
 
         colors = random_colors(masks.shape[0])
@@ -185,11 +185,12 @@ class InstanceHeat(object):
             apply_mask(image=out_img, mask=mask, color=color, alpha=0.8)
         if save_flag:
             cv2.imwrite(os.path.join(save_path, img_id+".png"), np.uint8(out_img))
-        cv2.imshow('out_img', np.uint8(out_img))
-        k = cv2.waitKey(0)
-        if k & 0xFF == ord('q'):
-            cv2.destroyAllWindows()
-            exit(1)
+
+        # cv2.imshow('out_img', np.uint8(out_img))
+        # k = cv2.waitKey(0)
+        # if k & 0xFF == ord('q'):
+        #     cv2.destroyAllWindows()
+        #     exit(1)
 
     def test(self, args):
         self.load_weights(resume=args.resume, dataset=args.dataset)
@@ -205,6 +206,7 @@ class InstanceHeat(object):
         dataset_module = self.dataset[args.dataset]
         dsets = dataset_module(data_dir=args.data_dir, phase='test')
         all_time = []
+        print('dataset length:', len(dsets))
         for index in range(len(dsets)):
             time_begin = time.time()
             img = dsets.load_image(index)
@@ -225,5 +227,6 @@ class InstanceHeat(object):
 
 if __name__ == '__main__':
     args = parse_args()
+    args.data_dir = r'/home/xing/Xing/Projects/MDA/Projects/Datasets/Kaggle_2018'
     object_is = InstanceHeat()
     object_is.test(args)

@@ -1,0 +1,8 @@
+# folder
+/weights_kaggle
+/save_result_kaggle
+/.ipynb_checkpoints
+/.idea
+# files
+*.pyc
+

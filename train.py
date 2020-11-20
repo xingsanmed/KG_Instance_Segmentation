@@ -1,4 +1,5 @@
 import torch
+import torch.nn as nn
 import os
 import KGnet
 import numpy as np
@@ -8,10 +9,14 @@ import cv2
 from loss import DetectionLossAll
 import config as cfg
 import seg_loss
+from tqdm import tqdm
 from collater import collater
 from dataset_kaggle import Kaggle
 from dataset_plant import Plant
 from dataset_neural import Neural
+
+import warnings
+warnings.filterwarnings("ignore")
 
 def parse_args():
     parser = argparse.ArgumentParser(description="InstanceHeat")
@@ -20,7 +25,7 @@ def parse_args():
     parser.add_argument('--input_w', type=int, default=512, help='input width')
     parser.add_argument("--workers", help="workers number", default=4, type=int)
     parser.add_argument("--batch_size", help="batch size", default=2, type=int)
-    parser.add_argument("--epochs", help="epochs", default=100, type=int)
+    parser.add_argument("--epochs", help="epochs", default=30, type=int)
     parser.add_argument("--start_epoch", help="start_epoch", default=0, type=int)
     parser.add_argument("--lr", help="learning_rate", default=0.0001, type=int)
     parser.add_argument("--data_parallel", help="data parallel", default=False, type=bool)
@@ -33,8 +38,20 @@ def parse_args():
 class InstanceHeat(object):
     def __init__(self):
         self.model = KGnet.resnet50(pretrained=True)
-        self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+        self.device = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
         self.dataset = {'kaggle': Kaggle, 'plant': Plant, 'neural': Neural}
+
+        # os.environ["CUDA_VISIBLE_DEVICES"] = '1,2'
+        # model = KGnet.resnet50(pretrained=True)
+        # if torch.cuda.device_count()>1:
+        #     self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        #     self.dataset = {'kaggle': Kaggle, 'plant': Plant, 'neural': Neural}
+        #     self.model = nn.DataParallel(model)
+        # else:
+        #     self.device = torch.device("cuda:2" if torch.cuda.is_available() else "cpu")
+        #     self.dataset = {'kaggle': Kaggle, 'plant': Plant, 'neural': Neural}
+        #     self.model = model.to(self.device)
+
 
     def data_parallel(self):
         self.model = torch.nn.DataParallel(self.model)
@@ -134,7 +151,7 @@ class InstanceHeat(object):
         self.model.train()
         running_loss = 0.0
 
-        for data in train_loader:
+        for data in tqdm(train_loader):
             img, gt_c0, gt_c1, gt_c2, gt_c3, instance_masks, bboxes_c0  = data
             img = img.to(self.device)
             gt_c0 = gt_c0.to(self.device)
@@ -182,5 +199,9 @@ class InstanceHeat(object):
 
 if __name__ == '__main__':
     args = parse_args()
+    args.data_dir = r''
+    args.batch_size = 4
+    args.workers = 4
+    print(args)
     object_is = InstanceHeat()
     object_is.train(args)
