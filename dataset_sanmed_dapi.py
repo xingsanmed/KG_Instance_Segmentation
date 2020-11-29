@@ -10,9 +10,9 @@ import transforms
 import collater
 
 
-class Sanmed(BaseDataset):
+class Sanmed_dapi(BaseDataset):
     def __init__(self, data_dir, phase, transform=None):
-        super(Sanmed, self).__init__(data_dir, phase, transform)
+        super(Sanmed_dapi, self).__init__(data_dir, phase, transform)
         self.class_name = ['__background__', 'sanmed']
         self.num_classes = len(self.class_name)-1
 
@@ -67,18 +67,18 @@ class Sanmed(BaseDataset):
 
 if __name__ == '__main__':
     # dataset = {'kaggle': Kaggle, 'plant': Plant, 'neural': Neural}
-    dataset_module = Sanmed
+    dataset_module = Sanmed_dapi
 
-    data_dir = r'/home/xing/Share/Projects/Sanmed/cell_seg/Data/20201020_new'
+    data_dir = r'/home/xing/Share/Projects/Sanmed/cell_seg/20201127/Dapi_output'
     data_trans = {'train': transforms.Compose([transforms.ConvertImgFloat(),
                                                transforms.PhotometricDistort(),
                                                transforms.Expand(max_scale=2, mean=(0, 0, 0)),
                                                transforms.RandomMirror_w(),
                                                transforms.RandomMirror_h(),
-                                               transforms.Resize(h=256, w=256)]),
+                                               transforms.Resize(h=512, w=512)]),
 
                   'val': transforms.Compose([transforms.ConvertImgFloat(),
-                                             transforms.Resize(h=256, w=256)])}
+                                             transforms.Resize(h=512, w=512)])}
 
     dsets = {x: dataset_module(data_dir= data_dir,
                                phase=x,

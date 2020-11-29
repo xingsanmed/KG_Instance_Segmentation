@@ -6,3 +6,5 @@
 # files
 *.pyc
 
+/save_result_sanmed/
+/weights_sanmed/

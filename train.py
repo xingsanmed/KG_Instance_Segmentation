@@ -14,6 +14,8 @@ from collater import collater
 from dataset_kaggle import Kaggle
 from dataset_plant import Plant
 from dataset_neural import Neural
+from dataset_sanmed import Sanmed
+from dataset_sanmed_dapi import Sanmed_dapi
 
 import warnings
 warnings.filterwarnings("ignore")
@@ -21,6 +23,7 @@ warnings.filterwarnings("ignore")
 def parse_args():
     parser = argparse.ArgumentParser(description="InstanceHeat")
     parser.add_argument("--data_dir", help="data directory", default="../../../Datasets/kaggle/", type=str)
+    parser.add_argument("--resume", help="resume file", default="end_model.pth", type=str)
     parser.add_argument('--input_h', type=int, default=512, help='input height')
     parser.add_argument('--input_w', type=int, default=512, help='input width')
     parser.add_argument("--workers", help="workers number", default=4, type=int)
@@ -39,7 +42,7 @@ class InstanceHeat(object):
     def __init__(self):
         self.model = KGnet.resnet50(pretrained=True)
         self.device = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
-        self.dataset = {'kaggle': Kaggle, 'plant': Plant, 'neural': Neural}
+        self.dataset = {'kaggle': Kaggle, 'plant': Plant, 'neural': Neural, 'sanmed': Sanmed, 'sanmed_dapi':Sanmed_dapi}
 
         # os.environ["CUDA_VISIBLE_DEVICES"] = '1,2'
         # model = KGnet.resnet50(pretrained=True)
@@ -56,8 +59,8 @@ class InstanceHeat(object):
     def data_parallel(self):
         self.model = torch.nn.DataParallel(self.model)
 
-    def load_weights(self, resume):
-        self.model.load_state_dict(torch.load(resume))
+    def load_weights(self, resume, dataset):
+        self.model.load_state_dict(torch.load(os.path.join('weights_' + dataset, resume)))
 
     def map_mask_to_image(self, mask, img, color):
         # color = np.random.rand(3)
@@ -80,6 +83,8 @@ class InstanceHeat(object):
         weights_path = os.path.join("weights_"+args.dataset)
         if not os.path.exists(weights_path):
             os.mkdir(weights_path)
+        elif os.path.exists(os.path.join(weights_path,'end_model.pth')):
+            self.load_weights(resume=args.resume, dataset=args.dataset)
 
         self.model = self.model.to(self.device)
 
@@ -129,8 +134,8 @@ class InstanceHeat(object):
 
         train_loss_dict = []
         val_loss_dict = []
-        for epoch in range(args.start_epoch, args.epochs):
-            print('Epoch {}/{}'.format(epoch, args.epochs - 1))
+        for epoch in range(args.start_epoch, args.start_epoch+args.epochs):
+            print('Epoch {}/{}'.format(epoch, args.start_epoch+args.epochs - 1))
             print('-' * 10)
 
             train_epoch_loss = self.training(train_loader,loss_dec,loss_seg,optimizer,epoch, dsets['train'])
@@ -143,7 +148,7 @@ class InstanceHeat(object):
             np.savetxt('train_loss_{}.txt'.format(args.dataset), train_loss_dict, fmt='%.6f')
             np.savetxt('val_loss_{}.txt'.format(args.dataset), val_loss_dict, fmt='%.6f')
 
-            if epoch % 5 == 0 and epoch >0:
+            if epoch % 5 == 0 and epoch-args.start_epoch >0:
                 torch.save(self.model.state_dict(), os.path.join(weights_path, '{:d}_{:.4f}_model.pth'.format(epoch, train_epoch_loss)))
             torch.save(self.model.state_dict(), os.path.join(weights_path, 'end_model.pth'))
 
@@ -199,9 +204,11 @@ class InstanceHeat(object):
 
 if __name__ == '__main__':
     args = parse_args()
-    args.data_dir = r''
+    args.data_dir = r'/home/xing/Share/Projects/Sanmed/cell_seg/20201127/Dapi_output'
+    args.dataset = 'sanmed_dapi'
     args.batch_size = 4
     args.workers = 4
+    args.start_epoch = 0
     print(args)
     object_is = InstanceHeat()
     object_is.train(args)

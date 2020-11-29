@@ -17,7 +17,7 @@ NUM_EDGES = len(EDGES)
 NUM_KPS = 5
 
 # KP_RADIUS = 5 #default
-KP_RADIUS = 1
+KP_RADIUS = 5
 
 KEYPOINTS = [
     "tl",  # 0
