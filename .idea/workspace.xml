@@ -20,16 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="156871af-e96b-4908-bfbe-c6031f636a0c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/dataset_sanmed_dapi.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/eval_val.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/eval_val_dapi.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_sanmed.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_sanmed_debug.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataset_sanmed.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataset_sanmed.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sanmed_dataset_preprocessing.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/sanmed_dataset_preprocessing.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eval_val_dapi.py" beforeDir="false" afterPath="$PROJECT_DIR$/eval_val_dapi.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sanmed_dataset_preprocessing_DAPI.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/sanmed_dataset_preprocessing_DAPI.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/train.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -196,7 +190,7 @@
       <workItem from="1604883826192" duration="8482000" />
       <workItem from="1605042246468" duration="238000" />
       <workItem from="1605807105908" duration="41038000" />
-      <workItem from="1606075442259" duration="10348000" />
+      <workItem from="1606075442259" duration="27916000" />
     </task>
     <servers />
   </component>
@@ -220,38 +214,38 @@
       <screen x="67" y="27" width="2493" height="1413" />
     </state>
     <state x="1091" y="490" width="424" height="484" key="FileChooserDialogImpl/67.27.2493.1413@67.27.2493.1413" timestamp="1604560294091" />
-    <state width="1925" height="418" key="GridCell.Tab.0.bottom" timestamp="1606630040363">
+    <state width="2437" height="418" key="GridCell.Tab.0.bottom" timestamp="1606719058989">
       <screen x="67" y="27" width="2493" height="1413" />
     </state>
-    <state width="1925" height="418" key="GridCell.Tab.0.bottom/67.27.2493.1413@67.27.2493.1413" timestamp="1606630040363" />
-    <state width="1925" height="418" key="GridCell.Tab.0.center" timestamp="1606630040363">
+    <state width="2437" height="418" key="GridCell.Tab.0.bottom/67.27.2493.1413@67.27.2493.1413" timestamp="1606719058989" />
+    <state width="2437" height="418" key="GridCell.Tab.0.center" timestamp="1606719058988">
       <screen x="67" y="27" width="2493" height="1413" />
     </state>
-    <state width="1925" height="418" key="GridCell.Tab.0.center/67.27.2493.1413@67.27.2493.1413" timestamp="1606630040363" />
-    <state width="1925" height="418" key="GridCell.Tab.0.left" timestamp="1606630040362">
+    <state width="2437" height="418" key="GridCell.Tab.0.center/67.27.2493.1413@67.27.2493.1413" timestamp="1606719058988" />
+    <state width="2437" height="418" key="GridCell.Tab.0.left" timestamp="1606719058988">
       <screen x="67" y="27" width="2493" height="1413" />
     </state>
-    <state width="1925" height="418" key="GridCell.Tab.0.left/67.27.2493.1413@67.27.2493.1413" timestamp="1606630040362" />
-    <state width="1925" height="418" key="GridCell.Tab.0.right" timestamp="1606630040363">
+    <state width="2437" height="418" key="GridCell.Tab.0.left/67.27.2493.1413@67.27.2493.1413" timestamp="1606719058988" />
+    <state width="2437" height="418" key="GridCell.Tab.0.right" timestamp="1606719058989">
       <screen x="67" y="27" width="2493" height="1413" />
     </state>
-    <state width="1925" height="418" key="GridCell.Tab.0.right/67.27.2493.1413@67.27.2493.1413" timestamp="1606630040363" />
-    <state width="2439" height="405" key="GridCell.Tab.1.bottom" timestamp="1606075418214">
+    <state width="2437" height="418" key="GridCell.Tab.0.right/67.27.2493.1413@67.27.2493.1413" timestamp="1606719058989" />
+    <state width="2437" height="402" key="GridCell.Tab.1.bottom" timestamp="1606668502509">
       <screen x="67" y="27" width="2493" height="1413" />
     </state>
-    <state width="2439" height="405" key="GridCell.Tab.1.bottom/67.27.2493.1413@67.27.2493.1413" timestamp="1606075418214" />
-    <state width="2439" height="405" key="GridCell.Tab.1.center" timestamp="1606075418213">
+    <state width="2437" height="402" key="GridCell.Tab.1.bottom/67.27.2493.1413@67.27.2493.1413" timestamp="1606668502509" />
+    <state width="2437" height="402" key="GridCell.Tab.1.center" timestamp="1606668502508">
       <screen x="67" y="27" width="2493" height="1413" />
     </state>
-    <state width="2439" height="405" key="GridCell.Tab.1.center/67.27.2493.1413@67.27.2493.1413" timestamp="1606075418213" />
-    <state width="2439" height="405" key="GridCell.Tab.1.left" timestamp="1606075418213">
+    <state width="2437" height="402" key="GridCell.Tab.1.center/67.27.2493.1413@67.27.2493.1413" timestamp="1606668502508" />
+    <state width="2437" height="402" key="GridCell.Tab.1.left" timestamp="1606668502508">
       <screen x="67" y="27" width="2493" height="1413" />
     </state>
-    <state width="2439" height="405" key="GridCell.Tab.1.left/67.27.2493.1413@67.27.2493.1413" timestamp="1606075418213" />
-    <state width="2439" height="405" key="GridCell.Tab.1.right" timestamp="1606075418214">
+    <state width="2437" height="402" key="GridCell.Tab.1.left/67.27.2493.1413@67.27.2493.1413" timestamp="1606668502508" />
+    <state width="2437" height="402" key="GridCell.Tab.1.right" timestamp="1606668502508">
       <screen x="67" y="27" width="2493" height="1413" />
     </state>
-    <state width="2439" height="405" key="GridCell.Tab.1.right/67.27.2493.1413@67.27.2493.1413" timestamp="1606075418214" />
+    <state width="2437" height="402" key="GridCell.Tab.1.right/67.27.2493.1413@67.27.2493.1413" timestamp="1606668502508" />
     <state x="802" y="367" key="SettingsEditor" timestamp="1605807485164">
       <screen x="67" y="27" width="2493" height="1413" />
     </state>
@@ -261,20 +255,9 @@
     </state>
     <state x="976" y="347" width="840" height="678" key="search.everywhere.popup/67.27.2493.1413@67.27.2493.1413" timestamp="1606629284668" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/dataset_base.py</url>
-          <line>89</line>
-          <option name="timeStamp" value="23" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
-  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/KG_Instance_Segmentation$eval_val_dapi.coverage" NAME="eval_val_dapi Coverage Results" MODIFIED="1606630040351" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/KG_Instance_Segmentation$train.coverage" NAME="train Coverage Results" MODIFIED="1606506045326" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/KG_Instance_Segmentation$eval_val_dapi.coverage" NAME="eval_val_dapi Coverage Results" MODIFIED="1606719058975" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/KG_Instance_Segmentation$train.coverage" NAME="train Coverage Results" MODIFIED="1606674093680" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/KG_Instance_Segmentation$Nosetests_in_test_sanmed_py.coverage" NAME="Nosetests in test_sanmed.py Coverage Results" MODIFIED="1606075525069" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/KG_Instance_Segmentation$test.coverage" NAME="test Coverage Results" MODIFIED="1604940046840" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/KG_Instance_Segmentation$dataset_kaggle.coverage" NAME="dataset_kaggle Coverage Results" MODIFIED="1605914910162" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

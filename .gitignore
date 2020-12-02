@@ -1,10 +1,10 @@
 # folder
-/weights_kaggle
-/save_result_kaggle
+/weights_*
+/save_result_*
 /.ipynb_checkpoints
 /.idea
+
+
 # files
 *.pyc
 
-/save_result_sanmed/
-/weights_sanmed/

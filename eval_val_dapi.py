@@ -27,6 +27,7 @@ def parse_args():
     parser.add_argument('--nms_thresh', type=float, default=0.5, help='nms_thresh')
     parser.add_argument('--seg_thresh', type=float, default=0.5, help='seg_thresh')
     parser.add_argument("--dataset", help="training dataset", default='kaggle', type=str)
+    parser.add_argument("--date", help="training dataset", default='Nov01', type=str)
     args = parser.parse_args()
     return args
 
@@ -202,7 +203,7 @@ class InstanceHeat(object):
         self.model.eval()
 
         if args.save_img:
-            save_path = 'save_result_'+args.dataset
+            save_path = 'save_result_'+args.dataset + args.date
             if not os.path.exists(save_path):
                 os.mkdir(save_path)
         else:
@@ -231,7 +232,8 @@ class InstanceHeat(object):
 
 if __name__ == '__main__':
     args = parse_args()
-    args.data_dir = r'/home/xing/Share/Projects/Sanmed/cell_seg/20201127/Dapi_output'
+    args.data_dir = r'/home/xing/Share/Projects/Sanmed/cell_seg/20201127/Dapi_output_resize'
     args.dataset = 'sanmed_dapi'
+    args.date = '_Nov29'
     object_is = InstanceHeat()
     object_is.test(args)

@@ -80,13 +80,24 @@ class InstanceHeat(object):
         return heatmap
 
     def train(self, args):
-        weights_path = os.path.join("weights_"+args.dataset)
+        weights_path = os.path.join("weights_"+args.dataset+'_resize')
         if not os.path.exists(weights_path):
             os.mkdir(weights_path)
         elif os.path.exists(os.path.join(weights_path,'end_model.pth')):
             self.load_weights(resume=args.resume, dataset=args.dataset)
 
         self.model = self.model.to(self.device)
+        # os.environ["CUDA_VISIBLE_DEVICES"] = '0,1'
+        # model = KGnet.resnet50(pretrained=True)
+        # if torch.cuda.device_count()<1:
+        #     self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+        #     # self.dataset = {'kaggle': Kaggle, 'plant': Plant, 'neural': Neural}
+        #     self.model = nn.DataParallel(self.model)
+        #     self.model = self.model.to(self.device)
+        # else:
+        #     self.device = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
+        #     # self.dataset = {'kaggle': Kaggle, 'plant': Plant, 'neural': Neural}
+        #     self.model = self.model.to(self.device)
 
         self.model.train()
 
@@ -163,6 +174,7 @@ class InstanceHeat(object):
             gt_c1 = gt_c1.to(self.device)
             gt_c2 = gt_c2.to(self.device)
             gt_c3 = gt_c3.to(self.device)
+            # bboxes_c0 = bboxes_c0.to(self.device)
 
             optimizer.zero_grad()
 
@@ -191,6 +203,7 @@ class InstanceHeat(object):
                 gt_c1 = gt_c1.to(self.device)
                 gt_c2 = gt_c2.to(self.device)
                 gt_c3 = gt_c3.to(self.device)
+                # bboxes_c0 = bboxes_c0.to(self.device)
                 pr_c0, pr_c1, pr_c2, pr_c3, predictions = self.model(img, bboxes_c0)
                 loss1 = loss_dec(pr_c0, gt_c0)+loss_dec(pr_c1, gt_c1)+loss_dec(pr_c2, gt_c2)+loss_dec(pr_c3, gt_c3)
                 loss2 = loss_seg(predictions, instance_masks, bboxes_c0)
@@ -204,11 +217,13 @@ class InstanceHeat(object):
 
 if __name__ == '__main__':
     args = parse_args()
-    args.data_dir = r'/home/xing/Share/Projects/Sanmed/cell_seg/20201127/Dapi_output'
+    args.data_dir = r'/home/xing/Share/Projects/Sanmed/cell_seg/20201127/Dapi_output_resize'
     args.dataset = 'sanmed_dapi'
-    args.batch_size = 4
+    args.batch_size = 1
     args.workers = 4
     args.start_epoch = 0
+    args.input_h = 1024
+    args.input_w = 1024
     print(args)
     object_is = InstanceHeat()
     object_is.train(args)
