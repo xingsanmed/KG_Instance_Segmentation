@@ -21,13 +21,14 @@ def parse_args():
     parser = argparse.ArgumentParser(description="InstanceHeat")
     parser.add_argument("--data_dir", help="data directory", default="../../../../Datasets/kaggle/", type=str)
     parser.add_argument("--resume", help="resume file", default="end_model.pth", type=str)
-    parser.add_argument('--input_h', type=int, default=512, help='input height')
-    parser.add_argument('--input_w', type=int, default=512, help='input width')
+    parser.add_argument('--input_h', type=int, default=1024, help='input height')
+    parser.add_argument('--input_w', type=int, default=1024, help='input width')
     parser.add_argument('--save_img', type=bool, default=True, help='save img or not')
     parser.add_argument('--nms_thresh', type=float, default=0.5, help='nms_thresh')
     parser.add_argument('--seg_thresh', type=float, default=0.5, help='seg_thresh')
     parser.add_argument("--dataset", help="training dataset", default='kaggle', type=str)
-    parser.add_argument("--date", help="training dataset", default='Nov01', type=str)
+    parser.add_argument("--date", help="data save time", default='Nov01', type=str)
+    parser.add_argument("--desc", help="desc for model path", default='XXX', type=str)
     args = parser.parse_args()
     return args
 
@@ -64,6 +65,9 @@ class InstanceHeat(object):
 
     def load_weights(self, resume, dataset):
         self.model.load_state_dict(torch.load(os.path.join('weights_'+dataset, resume)))
+
+    def load_weights_desc(self, resume, dataset,desc):
+        self.model.load_state_dict(torch.load(os.path.join('weights_'+ dataset+ desc, resume)))
 
     def map_mask_to_image(self, mask, img, color):
         # color = np.random.rand(3)
@@ -198,7 +202,7 @@ class InstanceHeat(object):
         #     exit(1)
 
     def test(self, args):
-        self.load_weights(resume=args.resume, dataset=args.dataset)
+        self.load_weights_desc(resume=args.resume, dataset=args.dataset,desc = args.desc)
         self.model = self.model.to(self.device)
         self.model.eval()
 
@@ -232,8 +236,9 @@ class InstanceHeat(object):
 
 if __name__ == '__main__':
     args = parse_args()
-    args.data_dir = r'/home/xing/Share/Projects/Sanmed/cell_seg/20201127/Dapi_output'
+    args.data_dir = r'/home/xing/Share/Projects/Sanmed/cell_seg/20201127/Dapi_output_resize'
     args.dataset = 'sanmed_dapi'
     args.date = '_Dec02'
+    args.desc = '_resize'
     object_is = InstanceHeat()
     object_is.test(args)

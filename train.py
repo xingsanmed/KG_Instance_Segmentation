@@ -28,7 +28,7 @@ def parse_args():
     parser.add_argument('--input_w', type=int, default=512, help='input width')
     parser.add_argument("--workers", help="workers number", default=4, type=int)
     parser.add_argument("--batch_size", help="batch size", default=2, type=int)
-    parser.add_argument("--epochs", help="epochs", default=30, type=int)
+    parser.add_argument("--epochs", help="epochs", default=60, type=int)
     parser.add_argument("--start_epoch", help="start_epoch", default=0, type=int)
     parser.add_argument("--lr", help="learning_rate", default=0.0001, type=int)
     parser.add_argument("--data_parallel", help="data parallel", default=False, type=bool)
@@ -42,7 +42,7 @@ class InstanceHeat(object):
     def __init__(self):
         self.model = KGnet.resnet50(pretrained=True)
         self.device = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
-        self.dataset = {'kaggle': Kaggle, 'plant': Plant, 'neural': Neural, 'sanmed': Sanmed, 'sanmed_dapi':Sanmed_dapi}
+        self.dataset = {'kaggle': Kaggle, 'plant': Plant, 'neural': Neural, 'sanmed': Sanmed, 'sanmed_dapi_ori1024':Sanmed_dapi}
 
         # os.environ["CUDA_VISIBLE_DEVICES"] = '1,2'
         # model = KGnet.resnet50(pretrained=True)
@@ -80,7 +80,7 @@ class InstanceHeat(object):
         return heatmap
 
     def train(self, args):
-        weights_path = os.path.join("weights_"+args.dataset+'_resize')
+        weights_path = os.path.join("weights_"+args.dataset)
         if not os.path.exists(weights_path):
             os.mkdir(weights_path)
         elif os.path.exists(os.path.join(weights_path,'end_model.pth')):
@@ -217,8 +217,8 @@ class InstanceHeat(object):
 
 if __name__ == '__main__':
     args = parse_args()
-    args.data_dir = r'/home/xing/Share/Projects/Sanmed/cell_seg/20201127/Dapi_output_resize'
-    args.dataset = 'sanmed_dapi'
+    args.data_dir = r'/home/xing/Share/Projects/Sanmed/cell_seg/20201127/Dapi_output_ori'
+    args.dataset = 'sanmed_dapi_ori1024'
     args.batch_size = 1
     args.workers = 4
     args.start_epoch = 0
